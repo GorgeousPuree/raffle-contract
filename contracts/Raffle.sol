@@ -433,11 +433,6 @@ contract Raffle is IRaffle, VRFConsumerBaseV2, ReentrancyGuard, Ownable {
         prizes = raffles[raffleId].prizes;
     }
 
-    function getPrize(uint256 raffleId, uint256 prizeIndex) external view returns (Prize[] memory prize) {
-        prize = raffles[raffleId].prizes[prizeIndex];
-    }
-
-
     function getEntries(uint256 raffleId) external view returns (Entry[] memory entries) {
         entries = raffles[raffleId].entries;
     }
@@ -476,7 +471,7 @@ contract Raffle is IRaffle, VRFConsumerBaseV2, ReentrancyGuard, Ownable {
             TokenType prizeType = prizes[i].tokenType;
             address prizeAddress = prizes[i].prizeAddress;
             uint prizeAmount = prizes[i].prizeAmount;
-            uint prizeId = prizes[i].prizeAmount;
+            uint prizeId = prizes[i].prizeId;
 
             if (prizeType == TokenType.ERC721) {
                 IERC721(prizeAddress).transferFrom(address(this), recipient, prizeId);
